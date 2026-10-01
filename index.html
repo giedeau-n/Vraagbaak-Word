@@ -329,6 +329,8 @@ async function importDocx(file) {
   const root = document.createElement("div");
   root.innerHTML = res.value;
   const numOk = await fixListNumbering(buf, root);
+  // inhoudsopgave-regels herkennen vóór cleanHtml de #_Toc-links weghaalt
+  const tocEls = new Set([...root.children].filter(e => e.querySelector('a[href^="#_Toc"]')));
   cleanHtml(root);
 
   const els = [...root.children];
@@ -337,7 +339,7 @@ async function importDocx(file) {
   const pre = firstH1 > 0 ? els.slice(0, firstH1) : [];
   const titleParts = [];
   for (const e of pre) {
-    if (e.querySelector('a[href^="#_Toc"]')) break;
+    if (tocEls.has(e)) break;
     const t = blockText(e);
     if (t && t.length < 80 && !/^inhoud(sopgave)?$/i.test(t)) titleParts.push(t);
     if (titleParts.length >= 2) break;
@@ -349,7 +351,7 @@ async function importDocx(file) {
     const t = blockText(e);
     const hasMedia = !!e.querySelector("img,table") || e.tagName === "TABLE";
     if (!t && !hasMedia) continue;
-    if (e.querySelector('a[href^="#_Toc"]')) continue;
+    if (tocEls.has(e)) continue;
     let b = 0, hb = false;
     if (e.tagName === "H1") { b = 2; hb = true; const m = t.match(/^(\d{1,2})\b/); if (m) lastChap = +m[1]; }
     else if (/^H[2-6]$/.test(e.tagName)) { b = 1; hb = true; }
@@ -484,7 +486,7 @@ function buildIndex(sections) {
     }
     const seen = new Set([...f.title, ...f.kw, ...f.chap, ...f.body]);
     for (const w of seen) { df.set(w, (df.get(w) || 0) + 1); if (!vocab.has(w)) vocab.set(w, grams(w)); }
-    return { s, tf, len: Object.fromEntries(Object.entries(f).map(([k, v]) => [k, v.length])), ntitle: norm(stripNum(s.title)), nkw: norm(s.kw) };
+    return { s, tf, len: Object.fromEntries(Object.entries(f).map(([k, v]) => [k, v.length])), ntitle: norm(stripNum(s.title)), nkw: norm(s.kw), kwl: String(s.kw || "").split(",").map(norm).filter(Boolean) };
   });
   for (const k in avg) avg[k] = avg[k] / (D.length || 1) || 1;
   return { D, df, vocab, avg, F, BB, N: D.length };
@@ -555,8 +557,9 @@ function keywordSearch(ix, q) {
   const res = [];
   for (const [d, v] of scores) {
     let s = v.s * (0.6 + 0.4 * v.hits / qt.size);       // beloon dekking van de vraag
-    if (nq.includes(" ") && (d.ntitle.includes(nq) || d.nkw.includes(nq))) s *= 1.6;
-    if (nqRaw.includes(" ") && d.nkw.includes(nqRaw)) s *= 2;   // docent heeft deze vraag letterlijk als zoekwoord opgegeven
+    // alleen hele zoekwoorden tellen (niet 'pagina liggend' binnen 'één pagina liggend')
+    if (nq.includes(" ") && (d.ntitle.includes(nq) || d.kwl.includes(nq))) s *= 1.6;
+    if (d.kwl.some(k => k.includes(" ") && (k === nqRaw || (" " + nqRaw + " ").includes(" " + k + " ")))) s *= 2;   // docent heeft deze vraag als zoekwoord opgegeven
     res.push({ s: d.s, score: s, hits: v.hits });
   }
   return res.sort((a, b) => b.score - a.score);
@@ -600,7 +603,7 @@ async function loadSemantic() {
     try { pipe = await T.pipeline("feature-extraction", MODEL_ID, { dtype: "q8", progress_callback: prog }); }
     catch (e) { console.warn("eerste poging", e); T.env.useBrowserCache = false; pipe = await T.pipeline("feature-extraction", MODEL_ID, { dtype: "q8", progress_callback: prog }); }
     S.sem.pipe = pipe;
-    await embedSections();
+    if (!(await embedSections())) return; // een nieuwere run zet de status
     S.sem.status = "ready"; S.sem.msg = "Slim zoeken staat aan"; paintSem();
     if (S.query) runSearch(S.query, { keepScroll: true });
   } catch (e) {
@@ -611,7 +614,9 @@ async function loadSemantic() {
   }
 }
 
+let embedSeq = 0;
 async function embedSections() {
+  const my = ++embedSeq;
   const chunks = makeChunks(S.sections);
   S.sem.msg = "Theorie voorbereiden voor slim zoeken…"; paintSem();
   const vecs = [];
@@ -619,11 +624,14 @@ async function embedSections() {
   for (let i = 0; i < chunks.length; i += B) {
     const part = chunks.slice(i, i + B).map(c => "passage: " + c.text);
     const out = await S.sem.pipe(part, { pooling: "mean", normalize: true });
+    if (my !== embedSeq) return false; // inmiddels vervangen door een nieuwere run
     const dim = out.dims[1];
     for (let j = 0; j < part.length; j++) vecs.push(out.data.slice(j * dim, (j + 1) * dim));
     S.sem.pct = Math.round(100 * (i + part.length) / chunks.length); paintSem();
   }
+  if (my !== embedSeq) return false;
   S.sem.chunks = chunks; S.sem.vecs = vecs;
+  return true;
 }
 
 async function semanticSearch(q) {
@@ -654,8 +662,8 @@ async function hybridSearch(q) {
   // zeker genoeg? (drempels voor e5-small: cos ~0.80+ is meestal relevant)
   const kwSecond = kw[1]?.score || 0;
   const kwSure = kwTop >= 8 && kwTop >= 1.25 * kwSecond;
-  const semSure = sem && semTop >= 0.84 && (sem.length < 2 || semTop - sem[1].cos >= 0.012);
-  const agree = sem && kw.length && kw[0].s === sem[0].s;
+  const semSure = sem && sem.length && semTop >= 0.84 && (sem.length < 2 || semTop - sem[1].cos >= 0.012);
+  const agree = !!(sem && sem.length && kw.length && kw[0].s === sem[0].s);
   const confident = agree || (kwSure && !sem) || (kwSure && sem && list[0] === kw[0].s) || (semSure && !kw.length);
   return { list, confident, kwCount: kw.length, sem: !!sem };
 }
@@ -826,7 +834,7 @@ function mountStudent(container, inDocent = false) {
 function refresh() {
   S.sections = deriveSections(S.data);
   S.index = buildIndex(S.sections);
-  if (S.sem.status === "ready") { S.sem.status = "loading"; embedSections().then(() => { S.sem.status = "ready"; paintSem(); }); }
+  if (S.sem.status === "ready") { S.sem.status = "loading"; embedSections().then(ok => { if (ok) { S.sem.status = "ready"; paintSem(); } }); }
 }
 
 function docentTop() {
@@ -960,7 +968,7 @@ function isHeadingLike(b) { return b.t.length <= 80 && !/<img|<table/.test(b.h) 
 function renderExport(main) {
   const d = S.data, st = d.settings;
   const secs = visibleSections();
-  const size = new Blob([JSON.stringify(d)]).size + PRISTINE.length;
+  const size = new Blob([buildExportHtml()]).size;
   main.innerHTML = `<div class="panel" style="margin-top:16px"><div class="export">
     <div class="field"><label for="dt">Titel voor studenten</label><input id="dt" value="${esc(d.title)}"></div>
     <div class="field"><label for="di">Korte uitleg bovenaan (optioneel)</label><input id="di" value="${esc(st.intro || "")}" placeholder="Stel je vraag over de theorie. Je krijgt het stuk uit de theorie dat erbij hoort."></div>
@@ -995,7 +1003,7 @@ function buildExportHtml() {
   const json = JSON.stringify(d).replace(/</g, "\\u003c");
   const re = /(<script id="vb-data" type="application\/json">)[\s\S]*?(<\/script>)/;
   return PRISTINE.replace(re, (m, a, b) => a + json + b)
-    .replace(/<title>[\s\S]*?<\/title>/, "<title>" + esc(d.title) + " – vraagbaak</title>");
+    .replace(/<title>[\s\S]*?<\/title>/, () => "<title>" + esc(d.title) + " – vraagbaak</title>");
 }
 
 function exportStudent() {
@@ -1030,7 +1038,7 @@ document.addEventListener("click", e => {
   const t = e.target.closest("button,img,[data-sec]");
   if (!t) return;
   if (t.tagName === "IMG" && t.closest(".doc") && !t.closest(".blk")) {
-    const lb = document.createElement("div"); lb.className = "lb"; lb.innerHTML = `<img src="${t.src}" alt="${esc(t.alt)}">`;
+    const lb = document.createElement("div"); lb.className = "lb"; const im = document.createElement("img"); im.src = t.src; im.alt = t.alt; lb.append(im);
     lb.onclick = () => lb.remove(); document.body.append(lb); return;
   }
   if (t.dataset.sec != null) { const s = S.sections[+t.dataset.sec]; if (s) showSection(s, { scroll: true, q: "" }); return; }

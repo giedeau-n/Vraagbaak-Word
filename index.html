@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="nl"><head>
+<html lang="nl">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Werken met Word – Theorie – vraagbaak</title>
@@ -162,6 +163,69 @@ a{color:var(--accent)}
 .gate .spin{width:34px;height:34px;border-radius:50%;border:4px solid var(--surface-2);border-top-color:var(--accent);margin:0 auto 12px;animation:gspin 1s linear infinite}
 @keyframes gspin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.gate .spin,.gate .bar.busy i{animation:none}}
+/* ---------- huisstijl / thema ---------- */
+.topbar{border-bottom:3px solid var(--brand,var(--accent))}
+.brand .logo{height:32px;width:auto;max-width:120px;object-fit:contain;border-radius:6px;flex:none;display:block}
+a,.chip:hover,.steps b,.blk .c.isHead{color:var(--accent-text,var(--accent))}
+.chip:hover,.ocard:hover{border-color:var(--brand,var(--accent))}
+.look{display:grid;grid-template-columns:380px minmax(0,1fr);gap:20px;padding:16px 0 60px;align-items:start}
+@media (max-width:980px){.look{grid-template-columns:minmax(0,1fr)}}
+.look h4{margin:18px 0 8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.look h4:first-child{margin-top:0}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--border);padding:0}
+.sw.on{box-shadow:0 0 0 3px var(--text)}
+.sw.custom{display:grid;place-items:center;background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);overflow:hidden;position:relative}
+.sw.custom input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.cinfo{font-size:.84rem;color:var(--muted);margin-top:8px;display:grid;gap:4px}
+.cinfo i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px;border:1px solid var(--border)}
+.logopick{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.logopick .opt{border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:6px 10px;display:flex;gap:8px;align-items:center;font-size:.9rem}
+.logopick .opt.on{border-color:var(--text);box-shadow:0 0 0 1px var(--text)}
+.logopick img{height:26px;width:auto;border-radius:4px}
+.pvwrap{position:sticky;top:76px}
+.pvlabel{font-size:.8rem;color:var(--muted);margin:0 0 6px}
+.pv{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg);pointer-events:none;user-select:none;box-shadow:var(--shadow)}
+.pv .topbar{position:static}
+.pv .hero{padding:18px 0 6px}
+.pv .wrap{padding:0 18px}
+.pv .answer{margin:12px 0 18px}
+.pv .answer .body{max-height:220px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+/* ---------- inhoudsopgave indelen ---------- */
+.tocgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;padding:16px 0 60px;align-items:start}
+@media (max-width:980px){.tocgrid{grid-template-columns:minmax(0,1fr)}}
+.trow{display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.trow:last-child{border-bottom:0}
+.trow.ch{background:var(--surface-2);font-weight:600;margin-top:0}
+.trow.sub{padding-left:34px}
+.trow.hid .tt{text-decoration:line-through;opacity:.55}
+.trow.flash{animation:flash 1.2s ease-out}
+@keyframes flash{0%{background:var(--accent-soft)}100%{background:transparent}}
+.trow .tt{flex:1;min-width:160px;overflow:hidden;text-overflow:ellipsis}
+.trow .tag{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:1px 7px;flex:none}
+.trow .ctl{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.trow .ctl button{border:1px solid var(--border);background:var(--surface);border-radius:7px;min-width:30px;height:30px;padding:0 8px;font-size:.85rem}
+.trow .ctl button:hover:not(:disabled){border-color:var(--accent-text,var(--accent))}
+.trow .ctl button:disabled{opacity:.35;cursor:default}
+.trow .ctl select{border:1px solid var(--border);border-radius:7px;height:30px;background:var(--surface);max-width:220px;font-size:.85rem}
+.tocpv .toc{position:static;max-height:none}
+@media (min-width:900px){.topbar .wrap{flex-wrap:nowrap}.topbar .brand{flex:1 1 auto;min-width:0}.topbar .tabs,.topbar #newdoc{flex:none}}
+/* ---------- bekijken als student ---------- */
+.pvbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:16px 0 10px}
+.pvbar .note{margin:0;flex-basis:100%}
+.devs{display:flex;gap:4px;background:var(--surface-2);padding:4px;border-radius:10px}
+.devs button{border:0;background:transparent;padding:6px 12px;border-radius:7px}
+.devs button.on{background:var(--surface);box-shadow:var(--shadow);font-weight:600}
+.pvstage{display:flex;justify-content:center;padding-bottom:40px}
+.pvframe{border:1px solid var(--border);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);height:calc(100vh - 190px);min-height:480px;transition:width .25s;max-width:100%}
+.pvframe.phone{border-width:10px;border-color:#22282a;border-radius:28px}
+.pvframe.tablet{border-width:8px;border-color:#22282a;border-radius:20px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;text-align:left}
+@media (max-width:560px){.choice{grid-template-columns:1fr}}
+.choice button{border:2px solid var(--border);background:var(--surface);border-radius:12px;padding:14px;text-align:left;display:grid;gap:4px}
+.choice button:hover{border-color:var(--accent-text,var(--accent))}
+.choice b{font-size:1.02rem}
+.choice span{color:var(--muted);font-size:.88rem}
 main,#result,.panel{min-width:0}
 .blk .c img{max-height:220px;width:auto}
 .olist{grid-template-columns:minmax(0,1fr)}.ocard{min-width:0}.others{min-width:0}
@@ -422,6 +486,10 @@ function deriveSections(data) {
       out[out.length - 1].items.push(i);
     }
   });
+  if (data.settings && data.settings.renum) { // hoofdstukken opnieuw nummeren in de nieuwe volgorde
+    let n = 0;
+    for (const s of out) if (s.level === 2) s.title = s.hid ? stripNum(s.title) : (++n) + ". " + stripNum(s.title);
+  }
   for (const s of out) {
     s.text = s.items.map(i => data.blocks[i].t).join(" ");
     s.imgs = s.items.reduce((n, i) => n + (data.blocks[i].h.match(/<img/g) || []).length, 0);
@@ -483,7 +551,7 @@ function dice(a, b) {
   return (2 * n) / (a.size + b.size || 1);
 }
 
-function stripNum(t) { return String(t || "").replace(/^\s*\d{1,2}[.)]?\s+/, ""); }
+function stripNum(t) { return String(t || "").replace(/^\s*\d{1,2}(\.\d{1,2})*[.)]?\s+/, ""); }
 function buildIndex(sections) {
   const docs = sections.filter(s => !s.hid && !s.chapHid && !s.empty);
   const F = { title: 4, kw: 3, chap: 1.2, body: 1 };
@@ -780,10 +848,13 @@ function studentShell(inDocent = false) {
 }
 
 function autoExamples() {
-  const picks = S.sections.filter(s => s.level === 1 && !s.hid && !s.chapHid && !s.empty && s.title.length < 40);
+  // titels van hoofdstukken als voorbeeldzoekvraag (verspreid over de theorie), aangevuld met onderdelen
+  const ok = s => !s.hid && !s.chapHid && stripNum(s.title).length <= 40;
+  let picks = S.sections.filter(s => s.level === 2 && ok(s));
+  if (picks.length < 4) picks = picks.concat(S.sections.filter(s => s.level === 1 && !s.empty && ok(s)));
   const step = Math.max(1, Math.floor(picks.length / 4));
   const out = [];
-  for (let i = 0; i < picks.length && out.length < 4; i += step) out.push("Hoe werkt " + picks[i].title.replace(/^\d+[.)]?\s*/, "").toLowerCase() + "?");
+  for (let i = 0; i < picks.length && out.length < 4; i += step) { const t = stripNum(picks[i].title); if (!out.includes(t)) out.push(t); }
   return out;
 }
 
@@ -791,7 +862,7 @@ function renderToc() {
   const el = $("#toc"); if (!el) return;
   let h = "<h3>Inhoud</h3>";
   for (const s of S.sections) {
-    if (s.hid || s.chapHid) continue;
+    if (s.hid || s.chapHid || (s.level === 1 && s.empty)) continue;
     if (s.level === 2) h += `<button class="ch ${S.current === s ? "on" : ""}" data-sec="${s.id}" ${s.empty ? "data-first=1" : ""}>${esc(s.title)}</button>`;
     else h += `<button class="sec ${S.current === s ? "on" : ""}" data-sec="${s.id}">${esc(s.title)}</button>`;
   }
@@ -933,8 +1004,131 @@ function mountStudent(container, inDocent = false) {
   const setting = S.data.settings.semantic || "auto";
   if (!inDocent && setting === "auto") {
     loadSemantic();
-    setTimeout(() => { if (S.sem.status === "loading") openGate(); }, 600);
+    if (!/preview/i.test(location.hash)) setTimeout(() => { if (S.sem.status === "loading") openGate(); }, 600);
   }
+}
+
+/* ================================================================
+   Huisstijl en thema
+   ================================================================ */
+const VISTA_LOGO = "data:image/jpeg;base64,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";
+const BRAND_DEFAULT = "#EC644A";
+const ACCENTS = [
+  ["#EC644A", "VISTA (oranje met petrol knoppen, standaard)", "#00555C"], ["#1F6FB2", "Blauw"], ["#0B6B62", "Petrol"], ["#2E8540", "Groen"],
+  ["#6B4AA6", "Paars"], ["#9B2242", "Bordeaux"], ["#3D4A4F", "Antraciet"],
+];
+const HEX_RE = /^#[0-9a-f]{6}$/i;
+const LOGO_RE = /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/;
+
+function themeOf(d) {
+  const t = (d && d.settings && d.settings.theme) || {};
+  return {
+    accent: HEX_RE.test(t.accent || "") ? t.accent : BRAND_DEFAULT,
+    logo: t.logo === "none" ? "none" : (LOGO_RE.test(t.logo || "") ? t.logo : "vista"),
+  };
+}
+function logoSrc(th) { return th.logo === "none" ? "" : th.logo === "vista" ? VISTA_LOGO : th.logo; }
+function brandHtml(th, title) {
+  const src = logoSrc(th);
+  return `<div class="brand">${src ? `<img class="logo" src="${src}" alt="">` : `<span class="dot">?</span>`}<span class="t">${esc(title)}</span></div>`;
+}
+
+/* kleurrekenwerk (WCAG-contrast) */
+function hexRgb(h) { const n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function rgbHex(r, g, b) { return "#" + [r, g, b].map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, "0")).join("").toUpperCase(); }
+function lum(h) { return hexRgb(h).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0); }
+function contrast(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+function mix(a, b, t) { const p = hexRgb(a), q = hexRgb(b); return rgbHex(...p.map((v, i) => v + (q[i] - v) * t)); }
+function shadeTo(hex, toward, bg, min) { // meng richting zwart/wit tot het contrast met bg >= min is
+  for (let t = 0; t <= 1.0001; t += 0.02) { const c = mix(hex, toward, t); if (contrast(c, bg) >= min) return c; }
+  return toward;
+}
+function presetBtn(accent) { const p = ACCENTS.find(a => a[0].toLowerCase() === accent.toLowerCase()); return p && p[2] || null; }
+function themeVars(accent) {
+  const fixed = presetBtn(accent);
+  if (fixed) { // huisstijl met vaste knopkleur (zoals vistacollege.nl)
+    const L = { bg: "#F5F4F0" }, D = { surface: "#1C2220" };
+    const v = { light: {}, dark: {} };
+    v.light = { brand: accent, btn: fixed, ink: "#FFFFFF", text: contrast(fixed, L.bg) >= 4.5 ? fixed : shadeTo(fixed, "#000000", L.bg, 4.6), soft: mix(accent, "#FFFFFF", 0.86) };
+    const dText = shadeTo(fixed, "#FFFFFF", D.surface, 4.6);
+    v.dark = { brand: accent, btn: contrast(fixed, "#FFFFFF") >= 4.5 ? fixed : dText, ink: "#FFFFFF", text: dText, soft: mix(accent, D.surface, 0.72) };
+    v.info = { btnContrast: contrast(v.light.btn, v.light.ink), textAdjusted: false, inkDark: false, fixedBtn: fixed };
+    return v;
+  }
+  const L = { surface: "#FFFFFF", bg: "#F5F4F0", dark: "#141414" };
+  const D = { surface: "#1C2220", bg: "#141817", ink: "#0B0F0E" };
+  const v = { light: {}, dark: {}, info: {} };
+  // licht
+  v.light.brand = accent;
+  v.light.text = contrast(accent, L.bg) >= 4.5 ? accent : shadeTo(accent, "#000000", L.bg, 4.6);
+  if (contrast(accent, "#FFFFFF") >= 4.5) { v.light.btn = accent; v.light.ink = "#FFFFFF"; }
+  else if (contrast(accent, L.dark) >= 4.5) { v.light.btn = accent; v.light.ink = L.dark; }
+  else { v.light.btn = v.light.text; v.light.ink = "#FFFFFF"; }
+  v.light.soft = mix(accent, "#FFFFFF", 0.86);
+  // donker
+  v.dark.brand = accent;
+  v.dark.text = contrast(accent, D.surface) >= 4.5 ? accent : shadeTo(accent, "#FFFFFF", D.surface, 4.6);
+  const wi = contrast(accent, "#FFFFFF"), dk = contrast(accent, D.ink);
+  if (Math.max(wi, dk) >= 4.5) { v.dark.btn = accent; v.dark.ink = dk >= wi ? D.ink : "#FFFFFF"; }
+  else { v.dark.btn = v.dark.text; v.dark.ink = D.ink; }
+  v.dark.soft = mix(accent, D.surface, 0.72);
+  v.info = { btnContrast: contrast(v.light.btn, v.light.ink), textAdjusted: v.light.text !== accent, inkDark: v.light.ink !== "#FFFFFF" };
+  return v;
+}
+function applyTheme() {
+  const th = themeOf(S.data);
+  const v = themeVars(th.accent);
+  const blk = o => `--brand:${o.brand};--accent:${o.btn};--accent-ink:${o.ink};--accent-text:${o.text};--accent-soft:${o.soft};`;
+  let el = $("#vb-theme");
+  if (!el) { el = document.createElement("style"); el.id = "vb-theme"; document.head.append(el); }
+  el.textContent = `:root{${blk(v.light)}}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){${blk(v.dark)}}}`;
+  return v;
+}
+
+/* logo verkleinen tot max 256 px en ~100 KB */
+function shrinkLogo(file) {
+  return new Promise((res, rej) => {
+    if (!/^image\//.test(file.type)) { rej(new Error("Kies een afbeelding (png, jpg, svg)")); return; }
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const max = 256, r = Math.min(1, max / Math.max(img.naturalWidth || max, img.naturalHeight || max));
+      const c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round((img.naturalWidth || max) * r)); c.height = Math.max(1, Math.round((img.naturalHeight || max) * r));
+      const g = c.getContext("2d"); g.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      // transparantie? dan png, anders jpg
+      let alpha = false; try { const d = g.getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i] < 250) { alpha = true; break; } } catch (e) {}
+      let out = alpha ? c.toDataURL("image/png") : c.toDataURL("image/jpeg", 0.88);
+      if (out.length > 136000) out = c.toDataURL("image/jpeg", 0.75);
+      if (out.length > 136000) { rej(new Error("Het logo is te groot. Kies een kleinere afbeelding.")); return; }
+      res(out);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error("Deze afbeelding kan niet worden gelezen")); };
+    img.src = url;
+  });
+}
+
+/* thema opslaan / inladen */
+function saveTheme() {
+  const th = themeOf(S.data);
+  const json = JSON.stringify({ type: "vraagbaak-thema", v: 1, accent: th.accent, logo: th.logo }, null, 1);
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+  a.download = "vraagbaak-thema.json"; document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  toast("Thema opgeslagen als vraagbaak-thema.json");
+}
+async function loadTheme(file) {
+  try {
+    if (file.size > 400000) throw new Error("bestand is te groot");
+    const t = JSON.parse(await file.text());
+    if (!t || t.type !== "vraagbaak-thema") throw new Error("dit is geen vraagbaak-thema");
+    const th = {};
+    if (HEX_RE.test(t.accent || "")) th.accent = t.accent.toUpperCase();
+    if (t.logo === "none" || t.logo === "vista" || LOGO_RE.test(t.logo || "")) th.logo = t.logo;
+    S.data.settings.theme = th;
+    applyTheme(); renderDocent(); toast("Thema ingeladen");
+  } catch (e) { toast("Thema inladen lukt niet: " + e.message, 5000); }
 }
 
 /* ================================================================
@@ -949,12 +1143,14 @@ function refresh() {
 function docentTop() {
   const d = S.data;
   return `<header class="topbar"><div class="wrap">
-    <div class="brand"><span class="dot">?</span><span class="t">Vraagbaak – docent${d ? ": " + esc(d.title) : ""}</span></div>
+    ${brandHtml(themeOf(d), "Vraagbaak – docent" + (d ? ": " + d.title : ""))}
     <span class="spacer"></span>
     ${d ? `<div class="tabs" role="tablist">
       <button data-dtab="check" class="${S.dtab === "check" ? "on" : ""}">1. Onderdelen</button>
-      <button data-dtab="test" class="${S.dtab === "test" ? "on" : ""}">2. Testen</button>
-      <button data-dtab="export" class="${S.dtab === "export" ? "on" : ""}">3. Exporteren</button></div>
+      <button data-dtab="toc" class="${S.dtab === "toc" ? "on" : ""}">2. Inhoudsopgave</button>
+      <button data-dtab="look" class="${S.dtab === "look" ? "on" : ""}">3. Uiterlijk</button>
+      <button data-dtab="test" class="${S.dtab === "test" ? "on" : ""}">4. Bekijken</button>
+      <button data-dtab="export" class="${S.dtab === "export" ? "on" : ""}">5. Exporteren</button></div>
       <button class="btn small" id="newdoc" title="Ander Word-bestand inladen">Nieuw bestand</button>` : ""}
   </div></header>`;
 }
@@ -965,12 +1161,12 @@ function renderDocent() {
     app.innerHTML = docentTop() + `<div class="wrap"><div class="drop" id="drop">
       <h1>Maak van je theorie een vraagbaak</h1>
       <p>Sleep een Word-bestand (.docx) hierheen of kies er een.</p>
-      <p style="margin:18px 0"><label class="btn primary">Word-bestand kiezen<input type="file" id="file" accept=".docx" hidden></label></p>
-      <p><small>Een eerder gemaakte studentversie (.html) bewerk je door die te openen met <span class="kbd">#docent</span> achter de adresbalk.</small></p>
+      <p style="margin:18px 0"><label class="btn primary">Bestand kiezen<input type="file" id="file" accept=".docx,.html,.htm" hidden></label></p>
+      <p><small>Verder werken aan een eerder gemaakte vraagbaak? Sleep de studentversie (.html) hierheen. Hij krijgt dan ook meteen de nieuwste versie van de tool.</small></p>
       <div class="steps">
         <div><b>1. Onderdelen</b>De tool knipt je theorie op bij koppen. Jij controleert, splitst en voegt zoekwoorden toe.</div>
-        <div><b>2. Testen</b>Stel zelf vragen zoals een student dat zou doen.</div>
-        <div><b>3. Exporteren</b>Je krijgt één HTML-bestand voor studenten, met alle tekst en afbeeldingen erin.</div>
+        <div><b>2. Indeling en uiterlijk</b>Zet onderdelen onder het juiste hoofdstuk, kies kleur en logo binnen de huisstijl en test zoals een student.</div>
+        <div><b>3. Bekijken en exporteren</b>Bekijk het als student (laptop, tablet, telefoon) en download één HTML-bestand met alles erin.</div>
       </div></div></div>`;
     const drop = $("#drop");
     $("#file").onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
@@ -982,20 +1178,40 @@ function renderDocent() {
   app.innerHTML = docentTop() + `<div class="wrap" id="dmain"></div>`;
   const main = $("#dmain");
   if (S.dtab === "check") renderCheck(main);
-  else if (S.dtab === "test") { main.innerHTML = `<div id="sv"></div>`; mountStudent($("#sv"), true); }
+  else if (S.dtab === "toc") renderToc2(main);
+  else if (S.dtab === "look") renderLook(main);
+  else if (S.dtab === "test") renderPreview(main);
   else renderExport(main);
 }
 
+async function loadExport(f) {
+  const txt = await f.text();
+  const m = txt.match(/<script id="vb-data" type="application\/json">([\s\S]*?)<\/script>/);
+  let d = null; try { d = m && JSON.parse(m[1]); } catch (e) { d = null; }
+  if (!d || !Array.isArray(d.blocks) || !d.blocks.length) throw new Error("dit is geen studentversie van een vraagbaak");
+  d.settings = d.settings || {}; d.title = d.title || "Theorie";
+  return d;
+}
+
 async function loadFile(f) {
-  if (!/\.docx$/i.test(f.name)) { toast("Kies een .docx-bestand. Een oud .doc-bestand eerst in Word opslaan als .docx."); return; }
+  if (/\.html?$/i.test(f.name)) {
+    try {
+      S.data = await loadExport(f);
+      S.sel = 0; S.dtab = "check"; S.query = "";
+      refresh(); applyTheme(); renderDocent();
+      toast(`Vraagbaak ingeladen: ${S.sections.length} onderdelen.`, 4000);
+    } catch (e) { console.error(e); toast("Dit bestand kon niet worden gelezen: " + e.message, 6000); }
+    return;
+  }
+  if (!/\.docx$/i.test(f.name)) { toast("Kies een .docx-bestand (of een studentversie .html). Een oud .doc-bestand eerst in Word opslaan als .docx."); return; }
   toast("Bezig met inlezen…");
   try {
     S.data = await importDocx(f);
     S.sel = 0; S.dtab = "check"; S.query = "";
-    refresh();
+    refresh(); applyTheme();
     renderDocent();
     const w = S.data.warnings || [];
-    toast(`${S.sections.length} onderdelen gevonden.` + (w.length ? " " + w[0] : ""), 5000);
+    askMode(w[0]);
   } catch (e) { console.error(e); toast("Dit bestand kon niet worden gelezen: " + e.message, 6000); }
 }
 
@@ -1074,15 +1290,269 @@ function setBoundary(i, lvl) {
 }
 function isHeadingLike(b) { return b.t.length <= 80 && !/<img|<table/.test(b.h) && !/[.:;,]$/.test(b.t); }
 
+function previewHtml() {
+  const d = S.data, th = themeOf(d), st = d.settings;
+  const ex = (st.examples && st.examples.length ? st.examples : autoExamples()).slice(0, 5);
+  const s = visibleSections()[0];
+  return `<header class="topbar"><div class="wrap">${brandHtml(th, d.title)}</div></header>
+  <div class="wrap">
+    <section class="hero">
+      <h1>${esc(d.title)}</h1>
+      <p>${esc(st.intro || "Stel je vraag over de theorie. Je krijgt het stuk uit de theorie dat erbij hoort, met de afbeeldingen.")}</p>
+      <div class="searchbox" style="border-color:var(--brand)"><input type="text" tabindex="-1" placeholder="Bijvoorbeeld: hoe maak ik een inhoudsopgave?"><span class="btn primary">Zoek</span></div>
+      <div class="chips">${ex.map(e => `<span class="chip">${esc(e)}</span>`).join("")}</div>
+    </section>
+    ${s ? `<article class="answer"><div class="head">${s.crumb ? `<div class="crumb">${esc(s.crumb)}</div>` : ""}<h2>${esc(s.title)}</h2></div>
+      <div class="body doc">${sectionHtml(s)}</div></article>` : ""}
+  </div>`;
+}
+
+function renderLook(main) {
+  const d = S.data, st = d.settings, th = themeOf(d);
+  const v = applyTheme();
+  const isPreset = ACCENTS.some(a => a[0].toLowerCase() === th.accent.toLowerCase());
+  const custom = th.logo !== "vista" && th.logo !== "none";
+  main.innerHTML = `<div class="look">
+    <div class="panel"><div class="editor">
+      <h4>Teksten</h4>
+      <div class="field"><label for="dt">Titel voor studenten</label><input id="dt" value="${esc(d.title)}"></div>
+      <div class="field"><label for="di">Korte uitleg bovenaan (optioneel)</label><input id="di" value="${esc(st.intro || "")}" placeholder="Stel je vraag over de theorie. Je krijgt het stuk uit de theorie dat erbij hoort."></div>
+      <div class="field"><label for="de">Voorbeeldvragen (één per regel, optioneel)</label><textarea id="de" rows="4" placeholder="${esc(autoExamples().join("\n"))}">${esc((st.examples || []).join("\n"))}</textarea>
+        <small>Leeg laten = automatisch gekozen voorbeelden. Er worden er maximaal 5 getoond.</small></div>
+
+      <h4>Accentkleur</h4>
+      <div class="swatches" role="radiogroup" aria-label="Accentkleur">
+        ${ACCENTS.map(([c, n]) => `<button class="sw ${c.toLowerCase() === th.accent.toLowerCase() ? "on" : ""}" style="background:${c}" data-accent="${c}" title="${esc(n)}" aria-label="${esc(n)}"></button>`).join("")}
+        <label class="sw custom ${isPreset ? "" : "on"}" title="Eigen kleur"><input type="color" id="accentPick" value="${th.accent}" aria-label="Eigen kleur"></label>
+      </div>
+      <div class="cinfo">
+        <span><i style="background:${th.accent}"></i>${esc((ACCENTS.find(a => a[0].toLowerCase() === th.accent.toLowerCase()) || [0, "Eigen kleur"])[1])} · ${th.accent}</span>
+        <span>${v.info.fixedBtn ? `<i style="background:${v.info.fixedBtn}"></i>Knoppen en links in VISTA-petrol (${v.info.fixedBtn}) met witte tekst, zoals op vistacollege.nl. Contrast ${v.info.btnContrast.toFixed(1)}:1 ✓` : `Knoppen: ${v.info.inkDark ? "donkere" : "witte"} tekst, contrast ${v.info.btnContrast.toFixed(1)}:1 ✓`}</span>
+        ${v.info.textAdjusted ? `<span><i style="background:${v.light.text}"></i>Voor links en kleine tekst gebruikt de vraagbaak een donkerdere tint (${v.light.text}), anders is het niet goed leesbaar.</span>` : ""}
+      </div>
+
+      <h4>Logo</h4>
+      <div class="logopick">
+        <button class="opt ${th.logo === "vista" ? "on" : ""}" data-logo="vista"><img src="${VISTA_LOGO}" alt="">VISTA</button>
+        <button class="opt ${th.logo === "none" ? "on" : ""}" data-logo="none">Geen logo</button>
+        ${custom ? `<button class="opt on" data-logo="keep"><img src="${th.logo}" alt="">Eigen logo</button>` : ""}
+        <label class="opt" style="cursor:pointer">Eigen logo kiezen…<input type="file" id="logoFile" accept="image/*" hidden></label>
+      </div>
+      <div class="cinfo"><span>Het logo wordt automatisch verkleind (max. 256 px, ongeveer 100 KB).</span></div>
+
+      <h4>Thema delen</h4>
+      <div class="row">
+        <button class="btn small" id="themeSave">Thema opslaan</button>
+        <label class="btn small" style="cursor:pointer">Thema inladen<input type="file" id="themeFile" accept=".json,application/json" hidden></label>
+        <button class="btn small" id="themeReset">Terug naar standaard</button>
+      </div>
+      <div class="cinfo"><span>Een thema bevat de accentkleur en het logo. Zo gebruikt je hele opleiding dezelfde stijl.</span></div>
+    </div></div>
+    <div class="pvwrap"><p class="pvlabel">Voorbeeld: zo ziet de student het</p><div class="pv" id="pv" aria-hidden="true">${previewHtml()}</div></div>
+  </div>`;
+  const setTheme = patch => { st.theme = { ...themeOf(d), ...patch }; renderLook(main); refreshTop(); };
+  $("#dt").oninput = e => { d.title = e.target.value.trim() || "Theorie"; $("#pv").innerHTML = previewHtml(); };
+  $("#dt").onchange = () => refreshTop();
+  $("#di").oninput = e => { st.intro = e.target.value.trim(); $("#pv").innerHTML = previewHtml(); };
+  $("#de").oninput = e => { st.examples = e.target.value.split("\n").map(x => x.trim()).filter(Boolean); $("#pv").innerHTML = previewHtml(); };
+  main.querySelectorAll("[data-accent]").forEach(b => b.onclick = () => setTheme({ accent: b.dataset.accent }));
+  $("#accentPick").onchange = e => { if (HEX_RE.test(e.target.value)) setTheme({ accent: e.target.value.toUpperCase() }); };
+  $("#accentPick").oninput = e => { if (HEX_RE.test(e.target.value)) { st.theme = { ...themeOf(d), accent: e.target.value.toUpperCase() }; applyTheme(); } };
+  main.querySelectorAll("[data-logo]").forEach(b => b.onclick = () => { if (b.dataset.logo !== "keep") setTheme({ logo: b.dataset.logo }); });
+  $("#logoFile").onchange = async e => { const f = e.target.files[0]; if (!f) return; try { setTheme({ logo: await shrinkLogo(f) }); toast("Logo toegevoegd"); } catch (err) { toast(err.message, 5000); } };
+  $("#themeSave").onclick = saveTheme;
+  $("#themeFile").onchange = e => { const f = e.target.files[0]; if (f) loadTheme(f); };
+  $("#themeReset").onclick = () => { delete st.theme; renderLook(main); refreshTop(); };
+}
+function refreshTop() { // alleen de bovenbalk opnieuw tekenen (focus in het formulier blijft)
+  const top = $(".topbar"); if (!top) return;
+  const t = document.createElement("div"); t.innerHTML = docentTop(); top.replaceWith(t.firstElementChild);
+}
+
+/* ================================================================
+   Inhoudsopgave indelen (verplaatsen = blokken echt verplaatsen)
+   ================================================================ */
+function sectionRange(s) { // [start, eind) van één onderdeel of hoofdstuk-kop met eigen tekst
+  const nxt = S.sections[s.id + 1];
+  return [s.start, nxt ? nxt.start : S.data.blocks.length];
+}
+function chapterRange(c) { // hele hoofdstuk incl. onderdelen
+  const nxt = S.sections.find(x => x.id > c.id && x.level === 2);
+  return [c.start, nxt ? nxt.start : S.data.blocks.length];
+}
+function moveRange(a, b, to) { // blokken [a,b) verplaatsen naar positie 'to' (positie in de oorspronkelijke lijst)
+  const bl = S.data.blocks;
+  if (to >= a && to <= b) return;
+  const part = bl.slice(a, b);
+  if (to > b) { bl.splice(to, 0, ...part); bl.splice(a, b - a); }
+  else { bl.splice(a, b - a); bl.splice(to, 0, ...part); }
+}
+function tocAfter(keepBlock) {
+  refresh();
+  const i = S.data.blocks.indexOf(keepBlock);
+  S.tocFlash = keepBlock;
+  const s = S.sections.find(x => x.start === i);
+  if (s) S.sel = s.id;
+  renderDocent();
+}
+function chapterOf(s) { return s.level === 2 ? s : s.chap; }
+function chaptersList() { return S.sections.filter(x => x.level === 2); }
+
+function tocMove(id, dir) {
+  const s = S.sections[id], blk = S.data.blocks[s.start];
+  if (s.level === 2) {
+    const chs = chaptersList(), k = chs.indexOf(s), other = chs[k + dir];
+    if (!other) return;
+    const [a, b] = chapterRange(s);
+    if (dir < 0) moveRange(a, b, other.start); else { const [, ob] = chapterRange(other); moveRange(a, b, ob); }
+  } else {
+    const [a, b] = sectionRange(s);
+    const ch = s.chap, sibs = S.sections.filter(x => x.level === 1 && x.chap === ch), k = sibs.indexOf(s);
+    if (dir < 0) {
+      if (k > 0) moveRange(a, b, sibs[k - 1].start);
+      else { const chs = chaptersList(), pc = chs[chs.indexOf(ch) - 1]; if (!pc) return; moveRange(a, b, ch.start); } // naar het eind van het vorige hoofdstuk
+    } else {
+      if (k < sibs.length - 1) { const [, nb] = sectionRange(sibs[k + 1]); moveRange(a, b, nb); }
+      else { // naar het begin van het volgende hoofdstuk
+        const chs = chaptersList(), nc = chs[chs.indexOf(ch) + 1]; if (!nc) return;
+        moveRange(a, b, sectionRange(nc)[1]);
+      }
+    }
+  }
+  tocAfter(blk);
+}
+function tocMoveTo(id, chapId) { // onderdeel (of heel hoofdstuk) onderbrengen bij een ander hoofdstuk, achteraan
+  const s = S.sections[id], blk = S.data.blocks[s.start], target = S.sections[chapId];
+  if (!target || target === s) return;
+  const [a, b] = s.level === 2 ? chapterRange(s) : sectionRange(s);
+  const [, tb] = chapterRange(target);
+  if (s.level === 2) blk.b = 1;
+  moveRange(a, b, tb);
+  tocAfter(blk);
+  toast(s.level === 2 ? `"${stripNum(s.title)}" en de onderdelen ervan staan nu onder "${stripNum(target.title)}".` : `"${s.title}" staat nu onder "${stripNum(target.title)}".`, 4000);
+}
+function tocLevel(id) {
+  const s = S.sections[id], blk = S.data.blocks[s.start];
+  if (s.start === 0 && s.level === 2) { toast("Het eerste onderdeel moet een hoofdstuk blijven. Zet eerst een ander hoofdstuk bovenaan."); return; }
+  blk.b = s.level === 2 ? 1 : 2;
+  tocAfter(blk);
+}
+function tocNewChapter(title) {
+  title = (title || "").trim(); if (!title) { toast("Geef het nieuwe hoofdstuk een naam."); return; }
+  const blk = { h: `<h1>${esc(title)}</h1>`, t: title, b: 2, hb: true, nw: true };
+  S.data.blocks.push(blk);
+  tocAfter(blk);
+  toast(`Hoofdstuk "${title}" staat onderaan. Verplaats het met de pijltjes en zet er onderdelen onder.`, 5000);
+}
+function tocDelete(id) {
+  const s = S.sections[id], blk = S.data.blocks[s.start];
+  const hasKids = S.sections.some(x => x.chap === s && x !== s);
+  if (!blk.nw || hasKids || !s.empty) return;
+  S.data.blocks.splice(s.start, 1);
+  refresh(); S.sel = 0; renderDocent();
+}
+
+function renderToc2(main) {
+  const secs = S.sections, chs = chaptersList(), st = S.data.settings;
+  const opts = (s) => `<option value="">${s.level === 2 ? "Onderbrengen bij…" : "Verplaatsen naar…"}</option>` +
+    chs.filter(c => c !== s && c !== s.chap).map(c => `<option value="${c.id}">${esc(c.title)}</option>`).join("");
+  const rows = secs.map(s => {
+    const ch = s.chap, sibs = s.level === 1 ? secs.filter(x => x.level === 1 && x.chap === ch) : chs, k = sibs.indexOf(s);
+    const upOff = s.level === 2 ? k === 0 : (k === 0 && chs.indexOf(ch) === 0);
+    const downOff = s.level === 2 ? k === chs.length - 1 : (k === sibs.length - 1 && chs.indexOf(ch) === chs.length - 1);
+    const canDel = s.level === 2 && S.data.blocks[s.start].nw && s.empty && !secs.some(x => x.chap === s && x !== s);
+    return `<div class="trow ${s.level === 2 ? "ch" : "sub"} ${s.hid || s.chapHid ? "hid" : ""} ${S.tocFlash === S.data.blocks[s.start] ? "flash" : ""}">
+      <span class="tag">${s.level === 2 ? "Hoofdstuk" : "Onderdeel"}</span>
+      <span class="tt" title="${esc(s.title)}">${esc(s.title)}${s.level === 1 && s.empty ? ` <small style="color:var(--muted);font-weight:400">(geen tekst, studenten zien dit niet)</small>` : ""}</span>
+      <span class="ctl">
+        <button data-tmv="${s.id}:-1" ${upOff ? "disabled" : ""} title="Omhoog" aria-label="Omhoog">↑</button>
+        <button data-tmv="${s.id}:1" ${downOff ? "disabled" : ""} title="Omlaag" aria-label="Omlaag">↓</button>
+        <select data-tto="${s.id}" aria-label="Verplaatsen naar hoofdstuk">${opts(s)}</select>
+        <button data-tlv="${s.id}" title="${s.level === 2 ? "Maak hier een onderdeel van" : "Maak hier een hoofdstuk van"}">${s.level === 2 ? "→ onderdeel" : "→ hoofdstuk"}</button>
+        ${canDel ? `<button data-tdel="${s.id}" title="Leeg hoofdstuk verwijderen">✕</button>` : ""}
+      </span></div>`;
+  }).join("");
+  main.innerHTML = `<div class="tocgrid">
+    <div class="panel"><div class="ph"><h3>Hoofdstukken en onderdelen</h3><span class="spacer"></span><small style="color:var(--muted)">${chs.length} hoofdstukken · ${secs.length - chs.length} onderdelen</small></div>
+      <div id="trows">${rows}</div></div>
+    <div style="display:grid;gap:16px">
+      <div class="panel"><div class="editor">
+        <div class="help"><b>Zo werkt het</b><br>↑ ↓ verplaatst een onderdeel binnen het hoofdstuk (en over de grens naar het vorige of volgende hoofdstuk). Een hoofdstuk verhuist met al zijn onderdelen mee.<br><b>Verplaatsen naar…</b> zet een onderdeel achteraan in een ander hoofdstuk. <b>Onderbrengen bij…</b> maakt van een heel hoofdstuk een onderdeel van een ander hoofdstuk.</div>
+        <label style="display:flex;gap:8px;align-items:center;margin-bottom:12px;font-weight:600"><input type="checkbox" id="renum" ${st.renum ? "checked" : ""}> Hoofdstukken automatisch nummeren</label>
+        <small style="color:var(--muted);display:block;margin:-6px 0 14px">De nummers uit Word worden weggehaald en opnieuw toegekend in de nieuwe volgorde.</small>
+        <div class="field"><label for="nch">Nieuw hoofdstuk</label>
+          <div class="row"><input id="nch" placeholder="bijv. Opmaak" style="flex:1;min-width:0"><button class="btn small" id="nchAdd">Toevoegen</button></div>
+          <small>Een kapstok voor onderdelen uit andere hoofdstukken. Het komt onderaan te staan.</small></div>
+      </div></div>
+      <div class="panel tocpv"><div class="ph"><h3>Zo ziet de student de inhoud</h3></div><nav class="toc" style="border:0;box-shadow:none" id="tocpv"></nav></div>
+    </div></div>`;
+  // voorbeeld van de inhoudsopgave voor studenten
+  let h = "";
+  for (const x of S.sections) {
+    if (x.hid || x.chapHid || (x.level === 1 && x.empty)) continue;
+    h += x.level === 2 ? `<span class="ch" style="display:block">${esc(x.title)}</span>` : `<span class="sec" style="display:block">${esc(x.title)}</span>`;
+  }
+  $("#tocpv").innerHTML = h;
+  main.querySelectorAll("[data-tto]").forEach(el => el.onchange = () => { if (el.value !== "") tocMoveTo(+el.dataset.tto, +el.value); });
+  $("#renum").onchange = e => { st.renum = e.target.checked || undefined; refresh(); renderDocent(); };
+  $("#nchAdd").onclick = () => tocNewChapter($("#nch").value);
+  $("#nch").onkeydown = e => { if (e.key === "Enter") tocNewChapter($("#nch").value); };
+  const fl = main.querySelector(".trow.flash"); if (fl) fl.scrollIntoView({ block: "nearest" });
+  S.tocFlash = null;
+}
+
+/* ================================================================
+   Bekijken als student
+   ================================================================ */
+const DEVICES = { laptop: ["Laptop", "100%"], tablet: ["Tablet", "836px"], phone: ["Telefoon", "410px"] }; // incl. rand: binnenmaat 820 en 390 px
+function renderPreview(main) {
+  const dev = S.pvDev || "laptop";
+  if (S.pvUrl) URL.revokeObjectURL(S.pvUrl);
+  S.pvUrl = URL.createObjectURL(new Blob([buildExportHtml()], { type: "text/html" }));
+  main.innerHTML = `<div class="pvbar">
+      ${S.quick ? `<p class="note">Je theorie is automatisch ingedeeld in de huisstijl. Kijk hieronder of het klopt en stel een paar vragen zoals een student. Klaar? Ga naar <b>Exporteren</b>. Iets aanpassen kan altijd via de andere tabbladen.</p>` : ""}
+      <div class="devs" role="group" aria-label="Schermformaat">${Object.entries(DEVICES).map(([k, [n]]) => `<button data-dev="${k}" class="${k === dev ? "on" : ""}">${n}</button>`).join("")}</div>
+      <span style="color:var(--muted);font-size:.88rem">Dit is precies de versie die je exporteert. Je kunt erin zoeken en klikken.</span>
+      <span class="spacer"></span>
+      <button class="btn small" id="pvReload">Vernieuwen</button>
+      <button class="btn primary small" data-dtab="export">Naar exporteren →</button>
+    </div>
+    <div class="pvstage"><iframe class="pvframe ${dev}" id="pvf" title="Voorbeeld studentversie" style="width:${DEVICES[dev][1]}" src="${S.pvUrl}#preview"></iframe></div>`;
+  main.querySelectorAll("[data-dev]").forEach(b => b.onclick = () => {
+    S.pvDev = b.dataset.dev;
+    main.querySelectorAll("[data-dev]").forEach(x => x.classList.toggle("on", x === b));
+    const f = $("#pvf"); f.className = "pvframe " + S.pvDev; f.style.width = DEVICES[S.pvDev][1];
+  });
+  $("#pvReload").onclick = () => renderPreview(main);
+}
+
+/* keuze na het inladen van een Word-bestand */
+function askMode(warn) {
+  const g = document.createElement("div");
+  g.className = "gate"; g.id = "modeask"; g.setAttribute("role", "dialog"); g.setAttribute("aria-modal", "true"); g.setAttribute("aria-labelledby", "modeT");
+  g.innerHTML = `<div class="box" style="max-width:560px">
+    <h2 id="modeT">${S.sections.length} onderdelen gevonden. Hoe wil je verder?</h2>
+    <p>Je kunt later altijd nog van aanpak wisselen.</p>
+    <div class="choice">
+      <button data-mode="quick"><b>Snel klaar</b><span>De tool deelt alles automatisch in, in de huisstijl. Je bekijkt het resultaat en exporteert.</span></button>
+      <button data-mode="self"><b>Zelf aanpassen</b><span>Je controleert de onderdelen, zet ze onder de juiste hoofdstukken en kiest kleur en logo.</span></button>
+    </div></div>`;
+  document.body.append(g);
+  g.querySelector("[data-mode=quick]").focus();
+  g.addEventListener("click", e => {
+    const b = e.target.closest("[data-mode]"); if (!b) return;
+    S.quick = b.dataset.mode === "quick"; S.dtab = S.quick ? "test" : "check";
+    g.remove(); renderDocent();
+    if (warn) toast(warn, 6000);
+  });
+}
+
 function renderExport(main) {
   const d = S.data, st = d.settings;
   const secs = visibleSections();
   const size = new Blob([buildExportHtml()]).size;
   main.innerHTML = `<div class="panel" style="margin-top:16px"><div class="export">
-    <div class="field"><label for="dt">Titel voor studenten</label><input id="dt" value="${esc(d.title)}"></div>
-    <div class="field"><label for="di">Korte uitleg bovenaan (optioneel)</label><input id="di" value="${esc(st.intro || "")}" placeholder="Stel je vraag over de theorie. Je krijgt het stuk uit de theorie dat erbij hoort."></div>
-    <div class="field"><label for="de">Voorbeeldvragen (één per regel, optioneel)</label><textarea id="de" rows="4" placeholder="${esc(autoExamples().join("\n"))}">${esc((st.examples || []).join("\n"))}</textarea>
-      <small>Leeg laten = automatisch gekozen voorbeelden.</small></div>
+    <p style="margin-top:0">Titel, uitleg, voorbeeldvragen, kleur en logo stel je in bij <b>3. Uiterlijk</b>.</p>
     <div class="field"><label for="ds">Slim zoeken (taalmodel)</label>
       <select id="ds">
         <option value="auto" ${st.semantic === "auto" ? "selected" : ""}>Automatisch laden bij openen (aanbevolen)</option>
@@ -1098,11 +1568,8 @@ function renderExport(main) {
     </ul>
     <div class="row">
       <button class="btn primary" id="doExport">Studentversie downloaden (.html)</button>
-      <span style="color:var(--muted);font-size:.88rem">Tip: dit bestand is ook je projectbestand. Open het later met <span class="kbd">#docent</span> achter de bestandsnaam in de adresbalk om verder te bewerken.</span>
+      <span style="color:var(--muted);font-size:.88rem">Tip: dit bestand is ook je projectbestand. Sleep het later in de docententool (of open het met <span class="kbd">#docent</span> achter de bestandsnaam) om verder te bewerken.</span>
     </div></div></div>`;
-  $("#dt").onchange = e => { d.title = e.target.value.trim() || d.title; };
-  $("#di").onchange = e => { st.intro = e.target.value.trim(); };
-  $("#de").onchange = e => { st.examples = e.target.value.split("\n").map(x => x.trim()).filter(Boolean); };
   $("#ds").onchange = e => { st.semantic = e.target.value; };
   $("#doExport").onclick = exportStudent;
 }
@@ -1154,11 +1621,14 @@ document.addEventListener("click", e => {
   if (t.dataset.ex != null) { const q = t.dataset.ex; $("#q").value = q; runSearch(q); return; }
   if (t.id === "semload") { if (S.mode === "student") openGate(); loadSemantic(); return; }
   if (t.id === "gateGo") { closeGate(); return; }
-  if (t.dataset.dtab) { S.dtab = t.dataset.dtab; renderDocent(); return; }
+  if (t.dataset.dtab) { if (t.dataset.dtab !== "test" && t.dataset.dtab !== "export") S.quick = false; S.dtab = t.dataset.dtab; renderDocent(); return; }
+  if (t.dataset.tmv) { const [i, d] = t.dataset.tmv.split(":").map(Number); tocMove(i, d); return; }
+  if (t.dataset.tlv != null) { tocLevel(+t.dataset.tlv); return; }
+  if (t.dataset.tdel != null) { tocDelete(+t.dataset.tdel); return; }
   if (t.dataset.pick != null) { S.sel = +t.dataset.pick; renderDocent(); return; }
   if (t.dataset.bnd) { const [i, l] = t.dataset.bnd.split(":").map(Number); setBoundary(i, l); return; }
   if (t.dataset.hb != null) { const b = S.data.blocks[+t.dataset.hb]; b.hb = !b.hb; refresh(); renderDocent(); return; }
-  if (t.id === "newdoc") { if (confirmNew()) { S.data = null; S.sections = []; renderDocent(); } return; }
+  if (t.id === "newdoc") { if (confirmNew()) { S.data = null; S.sections = []; S.quick = false; applyTheme(); renderDocent(); } return; }
 });
 function confirmNew() { return window.confirm("Ander Word-bestand inladen? Niet-geëxporteerde wijzigingen gaan verloren."); }
 document.addEventListener("keydown", e => { if (e.key === "Escape") $(".lb")?.remove(); });
@@ -1170,12 +1640,15 @@ function start() {
   S.data = data;
   S.mode = !data || /docent/i.test(location.hash) ? "docent" : "student";
   if (data) refresh();
+  applyTheme();
   if (S.mode === "docent") { renderDocent(); return; }
   document.title = data.title + " – vraagbaak";
-  app.innerHTML = `<header class="topbar"><div class="wrap"><div class="brand"><span class="dot">?</span><span class="t">${esc(data.title)}</span></div></div></header><div class="wrap" id="sv"></div>`;
+  app.innerHTML = `<header class="topbar"><div class="wrap">${brandHtml(themeOf(data), data.title)}</div></header><div class="wrap" id="sv"></div>`;
   mountStudent($("#sv"));
   setTimeout(() => { if (!$("#gate")) $("#q")?.focus(); }, 650);
 }
 start();
 
-</script></body></html>
+</script>
+</body>
+</html>
